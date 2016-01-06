@@ -2,6 +2,7 @@ var BuglessPanels = {
     moveThreshold: 20, // in px
     panelThreshold: 40, // in %
     panels: [],
+    activePanel: null,
     init: function(params) {
         var self = this;
         this.params = params;
@@ -35,17 +36,66 @@ var BuglessPanels = {
             this.listenLeftSwipe();
         }
 
+        this.initBackdrop();
+    },
+    initBackdrop: function() {
+        var self = this;
         this.backdrop = document.querySelector('.bugless-backdrop');
         if(this.backdrop == null) {
             this.backdrop = document.createElement('div');
             this.backdrop.setAttribute('class', 'bugless-backdrop');
             document.body.appendChild(this.backdrop);
-            this.backdrop.addEventListener('click', function(e) {
-                self.closeAll();
-            }, false);
+
+            var sposx = null, sposy = null;
+            this.backdrop.addEventListener('touchstart', function(e) {
+                sposx = e.touches[0].clientX;
+                sposy = e.touches[0].clientY;
+                self.activePanel.animateOff();
+            });
+
             this.backdrop.addEventListener('touchmove', function(e) {
-                e.preventDefault();
+                if(self.activePanel.position == Panel.POSITION_LEFT || self.activePanel.position == Panel.POSITION_RIGHT) {
+                    if(sposy != e.touches[0].clientY) {
+                        e.preventDefault();
+                    }
+                    var cx = Help.calculatePercentageX(e.touches[0].clientX);
+                    var x = cx * 100 / self.activePanel.width;
+                }
+
+                if(self.activePanel.position == Panel.POSITION_LEFT) {
+                    if(cx <= self.activePanel.width) {
+                        self.activePanel.moveX(x);
+                    }
+                }
+
+                if(self.activePanel.position == Panel.POSITION_RIGHT) {
+                    if(cx >= (100 - self.activePanel.width)) {
+                        self.activePanel.moveX(x - ((100 - self.activePanel.width) * 100 / self.activePanel.width));
+                    }
+                }
             }, false);
+
+            this.backdrop.addEventListener('touchend', function(e) {
+                if(sposx == e.changedTouches[0].clientX && sposy == e.changedTouches[0].clientY) {
+                    return self.closeAll();
+                }
+
+                if(self.activePanel && self.activePanel.position == Panel.POSITION_LEFT) {
+                    if((100 - self.activePanel.x) < self.panelThreshold) {
+                        self.activePanel.open();
+                    } else {
+                        self.activePanel.close();
+                    }
+                }
+
+                if(self.activePanel && self.activePanel.position == Panel.POSITION_RIGHT) {
+                    if(self.activePanel.x < self.panelThreshold) {
+                        self.activePanel.open();
+                    } else {
+                        self.activePanel.close();
+                    }
+                }
+            });
         }
     },
     initContentCMD: function() {

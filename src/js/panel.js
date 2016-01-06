@@ -255,6 +255,7 @@ Panel.prototype.moveY = function (value) {
 
 Panel.prototype.close = function () {
     var self = this;
+    BuglessPanels.activePanel = null;
     self.animateOn();
     switch(this.position) {
         case Panel.POSITION_LEFT:
@@ -288,6 +289,7 @@ Panel.prototype.close = function () {
 
 Panel.prototype.open = function () {
     var self = this;
+    BuglessPanels.activePanel = self;
     self.show();
     if(self.onShow && !self.isOpened && !self.onShowWasCalled) {
         self.onShow(self);

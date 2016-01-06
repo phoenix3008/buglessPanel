@@ -1,10 +1,3 @@
-BuglessPanels.init({
-    content: '.container',
-    leftPanel: leftPanel,
-    rightPanel: rightPanel,
-    panelThreshold: 30
-});
-
 var leftPanel = new Panel('#left-panel', {
     position: Panel.POSITION_LEFT,
     width: 80,
@@ -36,7 +29,12 @@ var bottomPanel = new Panel('#bottom-panel', {
     height: 30,
 });
 
-
+BuglessPanels.init({
+    content: '.container',
+    leftPanel: leftPanel,
+    rightPanel: rightPanel,
+    panelThreshold: 30
+});
 
 
 document.querySelector('#open-left').addEventListener('click', function() {
