@@ -75,8 +75,15 @@ var BuglessPanels = {
                 }
             }, false);
 
+            /*this.backdrop.addEventListener('click', function(e) {
+                self.closeAll();
+            });*/
+
             this.backdrop.addEventListener('touchend', function(e) {
-                if(sposx == e.changedTouches[0].clientX && sposy == e.changedTouches[0].clientY) {
+                if(
+                    (sposx < e.changedTouches[0].clientX + 5) && (sposx > e.changedTouches[0].clientX - 5) &&
+                    (sposy < e.changedTouches[0].clientY + 5) && (sposy > e.changedTouches[0].clientY - 5)
+                ) {
                     return self.closeAll();
                 }
 
@@ -190,7 +197,9 @@ var BuglessPanels = {
     },
     closeAll: function() {
         for(var i in this.panels) {
-            this.panels[i].isOpened && this.panels[i].close();
+            if(this.panels[i].isOpened) {
+                this.panels[i].close();
+            }
         }
     },
     backdropOn: function() {

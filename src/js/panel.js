@@ -7,7 +7,6 @@ function Panel(selector, params) {
     var self = this;
     self.element = document.querySelector(selector);
     self.innerElement = self.element.querySelector('.inner');
-    self.transitionEvent = Help.transitionEvent();
     self.x = null;
     self.y = null;
     self.isOpened = false;
@@ -36,6 +35,7 @@ function Panel(selector, params) {
     self.width = self.w = params.width || 100; // in %
     self.height = params.height || 100; // in %
     self.maxWidth = params.maxWidth || null; // in px
+    self.animationTime = params.animationTime || 200; // in ms
 
     self.applyPanelSizes();
 
@@ -83,8 +83,8 @@ function Panel(selector, params) {
 Panel.prototype.applyPanelSizes = function() {
     var self = this;
     if(self.maxWidth !== null) {
-        if((screen.width * self.width / 100) > self.maxWidth) {
-            self.width = self.maxWidth * 100 / screen.width;
+        if((window.innerWidth * self.w / 100) > self.maxWidth) {
+            self.width = self.maxWidth * 100 / window.innerWidth;
         } else {
             self.width = self.w;
         }
@@ -272,19 +272,14 @@ Panel.prototype.close = function () {
             break;
     }
 
-    function hidePanel() {
+    setTimeout(function() {
         BuglessPanels.backdropOff();
         self.hide();
         if(self.onClosed) {
             self.onClosed(self);
         }
-        self.element.removeEventListener(self.transitionEvent, hidePanel);
         self.isOpened = false;
-    }
-    if(self.transitionEvent) {
-        self.element.removeEventListener(self.transitionEvent, hidePanel);
-        self.element.addEventListener(self.transitionEvent, hidePanel);
-    }
+    }, self.animationTime);
 }
 
 Panel.prototype.open = function () {
@@ -313,17 +308,12 @@ Panel.prototype.open = function () {
             }
             clearInterval(intervalId);
 
-            function onShownEvent() {
-                self.element.removeEventListener(self.transitionEvent, onShownEvent);
+            setTimeout(function() {
                 if(self.onShown && !self.isOpened) {
                     self.onShown(self);
                 }
                 self.isOpened = true;
-            }
-            if(self.transitionEvent) {
-                self.element.removeEventListener(self.transitionEvent, onShownEvent);
-                self.element.addEventListener(self.transitionEvent, onShownEvent);
-            }
+            }, self.animationTime);
         }
     }, 50);
 }

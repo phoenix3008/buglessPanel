@@ -25,22 +25,6 @@ var Help = {
             el.className = el.className.replace(reg, ' ')
         }
     },
-    transitionEvent: function() {
-        var t,
-            el = document.createElement('fakeelement'),
-            transitions = {
-                transition: 'transitionend',
-                OTransition: 'oTransitionEnd',
-                MozTransition: 'transitionend',
-                WebkitTransition: 'webkitTransitionEnd'
-            }
-
-        for(t in transitions){
-            if(el.style[t] !== undefined){
-                return transitions[t];
-            }
-        }
-    },
     closest: function(el, selector) {
         var matchesFn, parent;
 
