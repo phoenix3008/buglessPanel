@@ -62,6 +62,24 @@ var BuglessPanels = {
                     var x = cx * 100 / self.activePanel.width;
                 }
 
+                if(self.activePanel.position == Panel.POSITION_TOP || self.activePanel.position == Panel.POSITION_BOTTOM) {
+                    e.preventDefault();
+                    var cy = Help.calculatePercentageY(e.touches[0].clientY); //%
+                    var y = cy * 100 / self.activePanel.height;
+                }
+
+                if(self.activePanel.position == Panel.POSITION_TOP) {
+                    if(cy <= self.activePanel.height) {
+                        self.activePanel.moveY(y);
+                    }
+                }
+
+                if(self.activePanel.position == Panel.POSITION_BOTTOM) {
+                    if(cy >= (100 - self.activePanel.height)) {
+                        self.activePanel.moveY(y - ((100 - self.activePanel.height) * 100 / self.activePanel.height));
+                    }
+                }
+
                 if(self.activePanel.position == Panel.POSITION_LEFT) {
                     if(cx <= self.activePanel.width) {
                         self.activePanel.moveX(x);
@@ -75,16 +93,28 @@ var BuglessPanels = {
                 }
             }, false);
 
-            /*this.backdrop.addEventListener('click', function(e) {
-                self.closeAll();
-            });*/
-
             this.backdrop.addEventListener('touchend', function(e) {
                 if(
                     (sposx < e.changedTouches[0].clientX + 5) && (sposx > e.changedTouches[0].clientX - 5) &&
                     (sposy < e.changedTouches[0].clientY + 5) && (sposy > e.changedTouches[0].clientY - 5)
                 ) {
                     return self.closeAll();
+                }
+
+                if(self.activePanel && self.activePanel.position == Panel.POSITION_TOP) {
+                    if((100 - self.activePanel.y) < self.panelThreshold) {
+                        self.activePanel.open();
+                    } else {
+                        self.activePanel.close();
+                    }
+                }
+
+                if(self.activePanel && self.activePanel.position == Panel.POSITION_BOTTOM) {
+                    if(self.activePanel.y < self.panelThreshold) {
+                        self.activePanel.open();
+                    } else {
+                        self.activePanel.close();
+                    }
                 }
 
                 if(self.activePanel && self.activePanel.position == Panel.POSITION_LEFT) {

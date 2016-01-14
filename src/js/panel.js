@@ -131,7 +131,7 @@ Panel.prototype.listenBottomSwipe = function() {
 
     self.elementCMD.on('touchstart', function(e) {
         self.animateOff();
-        sy = self.height - Help.calculatePercentageY(screen.height - e.touches[0].clientY);
+        sy = self.height - Help.calculatePercentageY(window.innerHeight - e.touches[0].clientY);
     });
 
     self.elementCMD.on('movebottom', function(e) {
@@ -195,7 +195,7 @@ Panel.prototype.listenRightSwipe = function() {
 
     self.elementCMD.on('touchstart', function(e) {
         self.animateOff();
-        sx = self.width - Help.calculatePercentageX(screen.width - e.touches[0].clientX);
+        sx = self.width - Help.calculatePercentageX(window.innerWidth - e.touches[0].clientX);
     });
 
     self.elementCMD.on('moveright', function(e) {
