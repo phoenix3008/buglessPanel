@@ -39,6 +39,7 @@ function Panel(selector, params) {
 
     self.applyPanelSizes();
 
+
     //orientationchange
     window.addEventListener('resize', function(e) {
         setTimeout(function() {
@@ -83,8 +84,8 @@ function Panel(selector, params) {
 Panel.prototype.applyPanelSizes = function() {
     var self = this;
     if(self.maxWidth !== null) {
-        if((window.innerWidth * self.w / 100) > self.maxWidth) {
-            self.width = self.maxWidth * 100 / window.innerWidth;
+        if((Help.screenWidth * self.w / 100) > self.maxWidth) {
+            self.width = self.maxWidth * 100 / Help.screenWidth;
         } else {
             self.width = self.w;
         }
@@ -131,7 +132,7 @@ Panel.prototype.listenBottomSwipe = function() {
 
     self.elementCMD.on('touchstart', function(e) {
         self.animateOff();
-        sy = self.height - Help.calculatePercentageY(window.innerHeight - e.touches[0].clientY);
+        sy = self.height - Help.calculatePercentageY(Help.screenHeight - e.touches[0].clientY);
     });
 
     self.elementCMD.on('movebottom', function(e) {
@@ -195,7 +196,7 @@ Panel.prototype.listenRightSwipe = function() {
 
     self.elementCMD.on('touchstart', function(e) {
         self.animateOff();
-        sx = self.width - Help.calculatePercentageX(window.innerWidth - e.touches[0].clientX);
+        sx = self.width - Help.calculatePercentageX(Help.screenWidth - e.touches[0].clientX);
     });
 
     self.elementCMD.on('moveright', function(e) {

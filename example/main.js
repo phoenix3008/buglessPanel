@@ -13,7 +13,19 @@ window.leftPanel2 = new Panel('#left-panel2', {
 var rightPanel = new Panel('#right-panel', {
     position: Panel.POSITION_RIGHT,
     width: 80,
-    maxWidth: 350
+    maxWidth: 350,
+    onShow: function() {
+        var i = 0;
+        var t = document.querySelector('#right-panel table');
+        var id = setInterval(function() {
+            t.innerHTML = '<tr><td>c - '+i+'<td><td>c - '+i+'<td></tr>' + t.innerHTML;
+            if(i >= 50) {
+                clearInterval(id);
+
+            }
+            i++;
+        }, 50);
+    }
 });
 
 var topPanel = new Panel('#top-panel', {
@@ -37,8 +49,8 @@ BuglessPanels.init({
 });
 
 
-document.querySelector('#open-left').addEventListener('click', function() {
-    leftPanel.open();
+document.querySelector('#open-right').addEventListener('click', function() {
+    rightPanel.open();
 });
 
 document.querySelector('#open-top').addEventListener('click', function() {
