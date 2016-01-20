@@ -20,10 +20,7 @@ function Panel(selector, params) {
     if(!params.position)
         throw new Error('Please specify the panel position');
 
-    // move any panels inside of content to outside of it
-    if(params.moveToBody) {
-        document.body.appendChild(self.element);
-    }
+    self.innerElement.style['min-height'] = (Help.screenHeight + 5) + 'px';
 
 
     // Params
