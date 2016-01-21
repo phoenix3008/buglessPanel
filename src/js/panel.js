@@ -20,8 +20,6 @@ function Panel(selector, params) {
     if(!params.position)
         throw new Error('Please specify the panel position');
 
-    self.innerElement.style['min-height'] = (Help.screenHeight + 5) + 'px';
-
 
     // Params
     self.onShow = params.onShow || null;
@@ -33,6 +31,8 @@ function Panel(selector, params) {
     self.height = params.height || 100; // in %
     self.maxWidth = params.maxWidth || null; // in px
     self.animationTime = params.animationTime || 200; // in ms
+
+    self.innerElement.style['min-height'] = ((Help.screenHeight * self.height / 100) + 5) + 'px';
 
     self.applyPanelSizes();
 

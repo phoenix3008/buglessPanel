@@ -21,7 +21,6 @@ var rightPanel = new Panel('#right-panel', {
             t.innerHTML = '<tr><td>c - '+i+'<td><td>c - '+i+'<td></tr>' + t.innerHTML;
             if(i >= 50) {
                 clearInterval(id);
-
             }
             i++;
         }, 50);
