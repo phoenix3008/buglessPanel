@@ -38,6 +38,9 @@ body {
   left: 0;
   right: 0;
 }
+.bugless-panel .inner {
+  min-height: calc(100% + 1px);
+}
 .bugless-backdrop {
   background: #000;
   opacity: 0;

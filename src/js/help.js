@@ -1,6 +1,10 @@
 var Help = {
-    screenWidth: document.documentElement.clientWidth,
-    screenHeight: document.documentElement.clientHeight,
+    screenWidth: function() {
+        return document.documentElement.clientWidth;
+    },
+    screenHeight: function() {
+        return document.documentElement.clientHeight
+    },
     calculatePercentageX: function(value) {
         return value * 100 / window.innerWidth;
     },

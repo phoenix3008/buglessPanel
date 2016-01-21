@@ -32,7 +32,7 @@ function Panel(selector, params) {
     self.maxWidth = params.maxWidth || null; // in px
     self.animationTime = params.animationTime || 200; // in ms
 
-    self.innerElement.style['min-height'] = ((Help.screenHeight * self.height / 100) + 5) + 'px';
+    //self.innerElement.style['min-height'] = (Help.screenHeight() + 100) + 'px';
 
     self.applyPanelSizes();
 
@@ -81,8 +81,8 @@ function Panel(selector, params) {
 Panel.prototype.applyPanelSizes = function() {
     var self = this;
     if(self.maxWidth !== null) {
-        if((Help.screenWidth * self.w / 100) > self.maxWidth) {
-            self.width = self.maxWidth * 100 / Help.screenWidth;
+        if((Help.screenWidth() * self.w / 100) > self.maxWidth) {
+            self.width = self.maxWidth * 100 / Help.screenWidth();
         } else {
             self.width = self.w;
         }
@@ -129,7 +129,7 @@ Panel.prototype.listenBottomSwipe = function() {
 
     self.elementCMD.on('touchstart', function(e) {
         self.animateOff();
-        sy = self.height - Help.calculatePercentageY(Help.screenHeight - e.touches[0].clientY);
+        sy = self.height - Help.calculatePercentageY(Help.screenHeight() - e.touches[0].clientY);
     });
 
     self.elementCMD.on('movebottom', function(e) {
@@ -193,7 +193,7 @@ Panel.prototype.listenRightSwipe = function() {
 
     self.elementCMD.on('touchstart', function(e) {
         self.animateOff();
-        sx = self.width - Help.calculatePercentageX(Help.screenWidth - e.touches[0].clientX);
+        sx = self.width - Help.calculatePercentageX(Help.screenWidth() - e.touches[0].clientX);
     });
 
     self.elementCMD.on('moveright', function(e) {

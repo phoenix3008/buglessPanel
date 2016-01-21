@@ -188,7 +188,7 @@ var BuglessPanels = {
             touchedOnContent = false;
 
         self.contentCMD.on('touchstart', function (e) {
-            sx = Help.calculatePercentageX(screen.width - e.touches[0].clientX);
+            sx = Help.calculatePercentageX(Help.screenWidth() - e.touches[0].clientX);
             touchedOnContent = Help.closest(e.target, '.bugless-panel') == null && e.target != document.querySelector('.bugless-panel');
         });
 
