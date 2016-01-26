@@ -60,3 +60,7 @@ body {
 .animate {
   transition: transform 0.2s linear;
 }
+.iosfix {
+  height: 101%;
+  overflow: hidden;
+}

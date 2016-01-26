@@ -14,17 +14,6 @@ var rightPanel = new Panel('#right-panel', {
     position: Panel.POSITION_RIGHT,
     width: 80,
     maxWidth: 350,
-    onShow: function() {
-        var i = 0;
-        var t = document.querySelector('#right-panel table');
-        var id = setInterval(function() {
-            t.innerHTML = '<tr><td>c - '+i+'<td><td>c - '+i+'<td></tr>' + t.innerHTML;
-            if(i >= 50) {
-                clearInterval(id);
-            }
-            i++;
-        }, 50);
-    }
 });
 
 var topPanel = new Panel('#top-panel', {

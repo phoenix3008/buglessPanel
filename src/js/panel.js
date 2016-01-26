@@ -32,9 +32,23 @@ function Panel(selector, params) {
     self.maxWidth = params.maxWidth || null; // in px
     self.animationTime = params.animationTime || 200; // in ms
 
-    //self.innerElement.style['min-height'] = (Help.screenHeight() + 100) + 'px';
-
     self.applyPanelSizes();
+
+
+    // iOS fix
+    if(self.innerElement.querySelectorAll('input[type="text"], select').length) {
+        var inputs = self.innerElement.querySelectorAll('input[type="text"], select');
+        var fixDiv = document.createElement('div');
+        fixDiv.className = 'iosfix';
+        for(var i = 0; i < inputs.length; i++) {
+            inputs[i].addEventListener('focusout', function(e) {
+                self.innerElement.appendChild(fixDiv);
+                setTimeout(function() {
+                    self.innerElement.querySelector('.iosfix').remove()
+                }, 500);
+            });
+        }
+    }
 
 
     //orientationchange
