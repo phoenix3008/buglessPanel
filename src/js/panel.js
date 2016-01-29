@@ -30,7 +30,8 @@ function Panel(selector, params) {
     self.width = self.w = params.width || 100; // in %
     self.height = params.height || 100; // in %
     self.maxWidth = params.maxWidth || null; // in px
-    self.animationTime = params.animationTime || 200; // in ms
+
+    BuglessPanels.panels.push(self);
 
     self.applyPanelSizes();
 
@@ -50,7 +51,6 @@ function Panel(selector, params) {
         }
     }
 
-
     //orientationchange
     window.addEventListener('resize', function(e) {
         setTimeout(function() {
@@ -58,7 +58,7 @@ function Panel(selector, params) {
         }, 100);
     }, false);
 
-    BuglessPanels.panels.push(self);
+
 
     if(params.closeBySwipe !== false) {
         self.elementCMD = new CMD(self.element, {
@@ -291,7 +291,7 @@ Panel.prototype.close = function () {
             self.onClosed(self);
         }
         self.isOpened = false;
-    }, self.animationTime);
+    }, BuglessPanels.getAnimationTime());
 }
 
 Panel.prototype.open = function () {
@@ -303,6 +303,7 @@ Panel.prototype.open = function () {
     }
     var intervalId = setInterval(function() {
         if(self.element.style.display == 'block') {
+            clearInterval(intervalId);
             self.animateOn();
             switch(self.position) {
                 case Panel.POSITION_LEFT:
@@ -318,14 +319,13 @@ Panel.prototype.open = function () {
                     self.moveY(0);
                     break;
             }
-            clearInterval(intervalId);
 
             setTimeout(function() {
                 if(self.onShown && !self.isOpened) {
                     self.onShown(self);
                 }
                 self.isOpened = true;
-            }, self.animationTime);
+            }, BuglessPanels.getAnimationTime());
         }
     }, 50);
 }

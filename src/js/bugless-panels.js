@@ -220,6 +220,15 @@ var BuglessPanels = {
             touchedOnContent = false;
         });
     },
+    getAnimationTime: function() {
+        var t = 0;
+        try {
+            t = parseFloat(getComputedStyle(document.querySelector('.animate'))['transitionDuration']) * 1000;
+        } catch(e) {
+            t = 200;
+        }
+        return t;
+    },
     panelsAnimateOff: function() {
         for(var i in this.panels) {
             this.panels[i].animateOff();

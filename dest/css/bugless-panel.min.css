@@ -41,6 +41,9 @@ body {
 .bugless-panel .inner {
   min-height: calc(100% + 1px);
 }
+.bugless-panel.animate {
+  transition: transform 0.2s linear;
+}
 .bugless-backdrop {
   background: #000;
   opacity: 0;
@@ -56,9 +59,6 @@ body {
 .bugless-backdrop.in {
   opacity: 0.5;
   pointer-events: all;
-}
-.animate {
-  transition: transform 0.2s linear;
 }
 .iosfix {
   height: 101%;
