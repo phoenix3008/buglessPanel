@@ -33,7 +33,8 @@ BuglessPanels.init({
     content: '.container',
     leftPanel: leftPanel,
     rightPanel: rightPanel,
-    panelThreshold: 30
+    panelThreshold: 30,
+    exceptions: ['#exception1', '#exception2']
 });
 
 

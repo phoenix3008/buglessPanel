@@ -3,6 +3,8 @@ var BuglessPanels = {
     panelThreshold: 40, // in %
     panels: [],
     activePanel: null,
+    exceptions: [],
+    _startTarget: null,
     init: function(params) {
         var self = this;
         this.params = params;
@@ -17,6 +19,7 @@ var BuglessPanels = {
 
         this.moveThreshold = this.params.moveThreshold || 20;
         this.panelThreshold = this.params.panelThreshold || 40;
+        this.exceptions = this.params.exceptions || [];
 
         if(params.leftPanel) {
             if(!(params.leftPanel instanceof Panel))
@@ -144,17 +147,32 @@ var BuglessPanels = {
             });
         }
     },
+    isException: function(target) {
+        var self = this,
+            el = self.exceptions.length;
+        if(el === 0) return false;
+        for(var i = 0; i < el; i++) {
+//            console.log(target, self.exceptions[i]);
+            if(Help.closest(target, self.exceptions[i]) || target == document.querySelector(self.exceptions[i])) {
+                return true;
+            }
+        }
+        return false;
+    },
     listenRightSwipe: function() {
         var self = this,
             sx = null,
             touchedOnContent = false;
 
         self.contentCMD.on('touchstart', function (e) {
+            self._startTarget = e.target;
+            if(self.isException(self._startTarget)) return;
             sx = Help.calculatePercentageX(e.touches[0].clientX);
             touchedOnContent = Help.closest(e.target, '.bugless-panel') == null && e.target != document.querySelector('.bugless-panel');
         });
 
         self.contentCMD.on('moveright', function (e) {
+            if(self.isException(self._startTarget)) return;
             if(e.direction !== false && touchedOnContent) {
                 if(self.leftPanel.onShow && !self.leftPanel.onShowWasCalled) {
                     self.leftPanel.onShow(self.leftPanel);
@@ -172,6 +190,7 @@ var BuglessPanels = {
         });
 
         self.contentCMD.on('moveendright', function(e) {
+            if(self.isException(self._startTarget)) return;
             var x = self.leftPanel.x * 100 / self.leftPanel.width;
             if(x > self.panelThreshold) {
                 self.leftPanel.open();
@@ -188,11 +207,14 @@ var BuglessPanels = {
             touchedOnContent = false;
 
         self.contentCMD.on('touchstart', function (e) {
+            self._startTarget = e.target;
+            if(self.isException(self._startTarget)) return;
             sx = Help.calculatePercentageX(Help.screenWidth() - e.touches[0].clientX);
             touchedOnContent = Help.closest(e.target, '.bugless-panel') == null && e.target != document.querySelector('.bugless-panel');
         });
 
         self.contentCMD.on('moveleft', function (e) {
+            if(self.isException(self._startTarget)) return;
             if(e.direction !== false && touchedOnContent) {
                 if(self.rightPanel.onShow && !self.rightPanel.onShowWasCalled) {
                     self.rightPanel.onShow(self.rightPanel);
@@ -211,6 +233,7 @@ var BuglessPanels = {
         });
 
         self.contentCMD.on('moveendleft', function(e) {
+            if(self.isException(self._startTarget)) return;
             if(self.rightPanel.x < 100 - self.panelThreshold) {
                 self.rightPanel.open();
             } else {
