@@ -1,0 +1,33 @@
+body {
+  font: 14px Arial, sans-serif;
+}
+.btn {
+  display: block;
+  font-size: 16px;
+  border-radius: 0;
+  height: 30px;
+  width: 100%;
+  margin-bottom: 20px;
+}
+ul {
+  list-style: none;
+  padding: 0;
+  white-space: nowrap;
+  overflow: auto;
+  font-size: 0;
+}
+ul li {
+  font-size: 16px;
+  display: inline-block;
+  padding: 10px;
+  margin: 0 10px;
+  background-color: #00bc48;
+}
+ul li a {
+  display: block;
+  text-decoration: none;
+  padding: 5px 20px;
+  background-color: #00b5d6;
+  color: #fff;
+  border: 1px solid #fff;
+}
