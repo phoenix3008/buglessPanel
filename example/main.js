@@ -34,7 +34,11 @@ BuglessPanels.init({
     leftPanel: leftPanel,
     rightPanel: rightPanel,
     panelThreshold: 30,
+<<<<<<< HEAD
     exceptions: ['#exception1', '#exception2', '.no-bp-trigger']
+=======
+    exceptions: ['#exception1', '#exception2']
+>>>>>>> af241596ac8ec56dec5848ab2cbac3778f87233c
 });
 
 

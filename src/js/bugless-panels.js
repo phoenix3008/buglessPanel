@@ -139,9 +139,7 @@ var BuglessPanels = {
                     }
                 }
             });
-            
         }
-        
     },
     initContentCMD: function() {
         var self = this;

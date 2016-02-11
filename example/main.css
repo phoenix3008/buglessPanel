@@ -9,6 +9,7 @@ body {
   width: 100%;
   margin-bottom: 20px;
 }
+<<<<<<< HEAD
 ul {
   list-style: none;
   padding: 0;
@@ -31,3 +32,5 @@ ul li a {
   color: #fff;
   border: 1px solid #fff;
 }
+=======
+>>>>>>> af241596ac8ec56dec5848ab2cbac3778f87233c

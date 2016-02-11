@@ -12,7 +12,6 @@ function CMD(element, params) {
     this.initListeners();
 }
 
-
 CMD.prototype.isException = function(target) {
     var self = this,
         el = self.exceptions.length;
