@@ -27,7 +27,8 @@ var bottomPanel = new Panel('#bottom-panel', {
     position: Panel.POSITION_BOTTOM,
     width: 100,
     height: 100,
-    closeBySwipe: false
+    //closeBySwipe: false
+    exceptions: ['#exception1-bottom']
 });
 
 BuglessPanels.init({

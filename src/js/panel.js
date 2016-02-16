@@ -30,6 +30,7 @@ function Panel(selector, params) {
     self.width = self.w = params.width || 100; // in %
     self.height = params.height || 100; // in %
     self.maxWidth = params.maxWidth || null; // in px
+    self.exceptions = params.exceptions || [];
 
     BuglessPanels.panels.push(self);
 
@@ -61,7 +62,8 @@ function Panel(selector, params) {
     self.elementCMD = new CMD(self.element, {
         threshold: BuglessPanels.moveThreshold,
         preventScroll: true,
-        innerElement: self.innerElement
+        innerElement: self.innerElement,
+        exceptions: self.exceptions
     });
 
     if(params.closeBySwipe !== false) {

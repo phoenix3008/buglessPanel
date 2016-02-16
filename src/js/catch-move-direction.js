@@ -37,24 +37,16 @@ CMD.prototype.initListeners = function () {
 
     self.element.addEventListener('touchstart', function(e) {
         self._startTarget = e.target;
-        if(self.isException(self._startTarget)) return;
         self.startX = e.touches[0].clientX;
         self.startY = e.touches[0].clientY;
+        if(self.isException(self._startTarget)) return;
     }, false);
 
     self.element.addEventListener('touchmove', function(e) {
-        if(self.isException(self._startTarget)) return;
         var deltaX = e.touches[0].clientX - self.startX,
             deltaY = e.touches[0].clientY - self.startY,
             movementX = Math.abs(deltaX) > 0,
             movementY = Math.abs(deltaY) > 0;
-
-        eventParams = {
-            touches: e.touches,
-            deltaX: deltaX,
-            deltaY: deltaY,
-            direction: stableDirection
-        };
 
         if(self.preventScroll) {
             if(deltaY > 0 && self.element.scrollTop <= 0) {
@@ -65,6 +57,14 @@ CMD.prototype.initListeners = function () {
             }
         }
 
+        if(self.isException(self._startTarget)) return;
+
+        eventParams = {
+            touches: e.touches,
+            deltaX: deltaX,
+            deltaY: deltaY,
+            direction: stableDirection
+        };
 
         if(stableDirection === false) {
             if(Math.abs(deltaX) > self.threshold) {
