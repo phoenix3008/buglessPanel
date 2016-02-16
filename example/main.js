@@ -25,8 +25,9 @@ var topPanel = new Panel('#top-panel', {
 
 var bottomPanel = new Panel('#bottom-panel', {
     position: Panel.POSITION_BOTTOM,
-    width: 80,
-    height: 30,
+    width: 100,
+    height: 100,
+    closeBySwipe: false
 });
 
 BuglessPanels.init({

@@ -58,15 +58,13 @@ function Panel(selector, params) {
         }, 100);
     }, false);
 
-
+    self.elementCMD = new CMD(self.element, {
+        threshold: BuglessPanels.moveThreshold,
+        preventScroll: true,
+        innerElement: self.innerElement
+    });
 
     if(params.closeBySwipe !== false) {
-        self.elementCMD = new CMD(self.element, {
-            threshold: BuglessPanels.moveThreshold,
-            preventScroll: true,
-            innerElement: self.innerElement
-        });
-
         switch(self.position) {
             case Panel.POSITION_LEFT:
                 self.x = -100;
@@ -87,6 +85,9 @@ function Panel(selector, params) {
                 self.x = 0;
                 self.y = 100;
                 self.listenBottomSwipe();
+                break;
+            default:
+                throw new Error('Unknown panel position:', self.position);
                 break;
         }
     }
