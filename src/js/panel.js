@@ -7,9 +7,6 @@ function Panel(selector, params) {
     var self = this;
     self.element = document.querySelector(selector);
     self.innerElement = self.element.querySelector('.inner');
-    self.x = null;
-    self.y = null;
-    self.isOpened = false;
 
     if(!self.element)
         throw new Error('Panel "' + selector + '" not found');
@@ -21,16 +18,56 @@ function Panel(selector, params) {
         throw new Error('Please specify the panel position');
 
 
+    // Properties
+    self.x = null;
+    self.y = null;
+    self.isOpened = false;
+    self.isMoving = false;
+
+
     // Params
-    self.onShow = params.onShow || null;
-    self.onShown = params.onShown || null;
-    self.onClose = params.onClose || null;
-    self.onClosed = params.onClosed || null;
     self.position = params.position;
     self.width = self.w = params.width || 100; // in %
     self.height = params.height || 100; // in %
     self.maxWidth = params.maxWidth || null; // in px
     self.exceptions = params.exceptions || [];
+    self.closeBySwipe = params.closeBySwipe || true;
+
+
+    self.elementCMD = new CMD(self.element, {
+        threshold: BuglessPanels.moveThreshold,
+        preventScroll: true,
+        innerElement: self.innerElement,
+        exceptions: self.exceptions
+    });
+
+    switch(self.position) {
+        case Panel.POSITION_LEFT:
+            self.x = -100;
+            self.y = 0;
+            Help.addClass(self.element, 'left');
+            self.closeBySwipe && self.listenLeftSwipe();
+            break;
+        case Panel.POSITION_RIGHT:
+            self.x = 100;
+            self.y = 0;
+            Help.addClass(self.element, 'right');
+            self.closeBySwipe && self.listenRightSwipe();
+            break;
+        case Panel.POSITION_TOP:
+            self.x = 0;
+            self.y = -100;
+            Help.addClass(self.element, 'top');
+            self.closeBySwipe && self.listenTopSwipe();
+            break;
+        case Panel.POSITION_BOTTOM:
+            self.x = 0;
+            self.y = 100;
+            Help.addClass(self.element, 'bottom');
+            self.closeBySwipe && self.listenBottomSwipe();
+            break;
+    }
+
 
     BuglessPanels.panels.push(self);
 
@@ -52,47 +89,12 @@ function Panel(selector, params) {
         }
     }
 
-    //orientationchange
+    //on resize or on orientationchange
     window.addEventListener('resize', function(e) {
         setTimeout(function() {
             self.applyPanelSizes();
         }, 100);
     }, false);
-
-    self.elementCMD = new CMD(self.element, {
-        threshold: BuglessPanels.moveThreshold,
-        preventScroll: true,
-        innerElement: self.innerElement,
-        exceptions: self.exceptions
-    });
-
-    if(params.closeBySwipe !== false) {
-        switch(self.position) {
-            case Panel.POSITION_LEFT:
-                self.x = -100;
-                self.y = 0;
-                self.listenLeftSwipe();
-                break;
-            case Panel.POSITION_RIGHT:
-                self.x = 100;
-                self.y = 0;
-                self.listenRightSwipe();
-                break;
-            case Panel.POSITION_TOP:
-                self.x = 0;
-                self.y = -100;
-                self.listenTopSwipe();
-                break;
-            case Panel.POSITION_BOTTOM:
-                self.x = 0;
-                self.y = 100;
-                self.listenBottomSwipe();
-                break;
-            default:
-                throw new Error('Unknown panel position:', self.position);
-                break;
-        }
-    }
 }
 
 Panel.prototype.applyPanelSizes = function() {
@@ -119,10 +121,6 @@ Panel.prototype.listenTopSwipe = function() {
 
     self.elementCMD.on('movetop', function(e) {
         if(e.direction !== false && (self.element.scrollTop + self.element.offsetHeight) >= self.innerElement.offsetHeight) {
-            if(self.onClose && !self.onCloseWasCalled) {
-                self.onClose(self);
-                self.onCloseWasCalled = true;
-            }
             var cursorPos = Help.calculatePercentageY(e.touches[0].clientY); //%
             var x = cursorPos * 100 / self.height;
             self.moveY(x + sy);
@@ -130,7 +128,6 @@ Panel.prototype.listenTopSwipe = function() {
     });
 
     self.elementCMD.on('moveendtop', function(e) {
-        self.onCloseWasCalled = false;
         if(self.y < 100 - BuglessPanels.panelThreshold) {
             self.close();
         } else {
@@ -138,7 +135,6 @@ Panel.prototype.listenTopSwipe = function() {
         }
     });
 }
-
 
 Panel.prototype.listenBottomSwipe = function() {
     var self = this,
@@ -151,11 +147,6 @@ Panel.prototype.listenBottomSwipe = function() {
 
     self.elementCMD.on('movebottom', function(e) {
         if(e.direction !== false && self.element.scrollTop <= 0) {
-            if(self.onClose && !self.onCloseWasCalled) {
-                self.onClose(self);
-                self.onCloseWasCalled = true;
-            }
-
             var t = Help.calculatePercentageY(e.touches[0].clientY) * 100 / self.height;
             t = t - ((100 - self.height) * 100 / self.height)
             self.moveY(t - sy);
@@ -163,7 +154,6 @@ Panel.prototype.listenBottomSwipe = function() {
     });
 
     self.elementCMD.on('moveendbottom', function(e) {
-        self.onCloseWasCalled = false;
         if(self.y > BuglessPanels.panelThreshold) {
             self.close();
         } else {
@@ -171,7 +161,6 @@ Panel.prototype.listenBottomSwipe = function() {
         }
     });
 }
-
 
 Panel.prototype.listenLeftSwipe = function() {
     var self = this,
@@ -184,10 +173,6 @@ Panel.prototype.listenLeftSwipe = function() {
 
     self.elementCMD.on('moveleft', function(e) {
         if(e.direction !== false) {
-            if(self.onClose && !self.onCloseWasCalled) {
-                self.onClose(self);
-                self.onCloseWasCalled = true;
-            }
             var cursorPos = Help.calculatePercentageX(e.touches[0].clientX); //%
             var x = cursorPos * 100 / self.width;
             self.moveX(x + sx);
@@ -195,7 +180,6 @@ Panel.prototype.listenLeftSwipe = function() {
     });
 
     self.elementCMD.on('moveendleft', function(e) {
-        self.onCloseWasCalled = false;
         if(self.x < 100 - BuglessPanels.panelThreshold) {
             self.close();
         } else {
@@ -215,10 +199,6 @@ Panel.prototype.listenRightSwipe = function() {
 
     self.elementCMD.on('moveright', function(e) {
         if(e.direction !== false) {
-            if(self.onClose && !self.onCloseWasCalled) {
-                self.onClose(self);
-                self.onCloseWasCalled = true;
-            }
             var x = Help.calculatePercentageX(e.touches[0].clientX) * 100 / self.width;
             x = x - ((100 - self.width) * 100 / self.width)
             self.moveX(x - sx);
@@ -226,7 +206,6 @@ Panel.prototype.listenRightSwipe = function() {
     });
 
     self.elementCMD.on('moveendright', function(e) {
-        self.onCloseWasCalled = false;
         if(self.x > BuglessPanels.panelThreshold) {
             self.close();
         } else {
@@ -244,8 +223,10 @@ Panel.prototype.animateOn = function() {
 }
 
 Panel.prototype.show = function() {
+    if(this.shown) return;
     BuglessPanels.backdropOn();
     this.element.style.display = 'block';
+    this.shown = true;
 }
 
 Panel.prototype.hide = function() {
@@ -258,6 +239,11 @@ Panel.prototype.moveX = function (value) {
     this.x = value;
     value = this.position == Panel.POSITION_LEFT ? (-100 + value) : value;
     this.element.style.transform = 'translateX(' + value + '%)';
+
+    if(!this.isMoving) {
+        Help.triggerEvent(this.element, this.isOpened ? 'close' : 'open', {panel: this});
+        this.isMoving = true;
+    }
 }
 
 Panel.prototype.moveY = function (value) {
@@ -266,6 +252,11 @@ Panel.prototype.moveY = function (value) {
     this.y = value;
     value = this.position == Panel.POSITION_TOP ? (-100 + value) : value;
     this.element.style.transform = 'translateY(' + value + '%)';
+
+    if(!this.isMoving) {
+        Help.triggerEvent(this.element, this.isOpened ? 'close' : 'open', {panel: this});
+        this.isMoving = true;
+    }
 }
 
 Panel.prototype.close = function () {
@@ -290,10 +281,10 @@ Panel.prototype.close = function () {
     setTimeout(function() {
         BuglessPanels.backdropOff();
         self.hide();
-        if(self.onClosed) {
-            self.onClosed(self);
-        }
+        Help.triggerEvent(self.element, 'closed', {panel: self});
         self.isOpened = false;
+        self.isMoving = false;
+        self.shown = false;
     }, BuglessPanels.getAnimationTime('.animate'));
 }
 
@@ -301,9 +292,7 @@ Panel.prototype.open = function () {
     var self = this;
     BuglessPanels.activePanel = self;
     self.show();
-    if(self.onShow && !self.isOpened && !self.onShowWasCalled) {
-        self.onShow(self);
-    }
+
     var intervalId = setInterval(function() {
         if(self.element.style.display == 'block') {
             clearInterval(intervalId);
@@ -324,11 +313,21 @@ Panel.prototype.open = function () {
             }
 
             setTimeout(function() {
-                if(self.onShown && !self.isOpened) {
-                    self.onShown(self);
+                if(!self.isOpened) {
+                    Help.triggerEvent(self.element, 'opened', {panel: self});
                 }
                 self.isOpened = true;
+                self.isMoving = false;
+                self.shown = false;
             }, BuglessPanels.getAnimationTime('.animate'));
         }
     }, 50);
+}
+
+Panel.prototype.on = function(event, callback) {
+    Help.addListener(this.element, event, callback, false);
+}
+
+Panel.prototype.off = function(event) {
+    Help.removeListener(this.element, event);
 }

@@ -4,6 +4,22 @@ var leftPanel = new Panel('#left-panel', {
     maxWidth: 350
 });
 
+leftPanel.on('open', function(e) {
+    console.log('open');
+});
+
+leftPanel.on('opened', function(e) {
+    console.log('opened');
+});
+
+leftPanel.on('close', function(e) {
+    console.log('close');
+});
+
+leftPanel.on('closed', function(e) {
+    console.log('closed');
+});
+
 window.leftPanel2 = new Panel('#left-panel2', {
     position: Panel.POSITION_LEFT,
     width: 80,
@@ -41,7 +57,7 @@ BuglessPanels.init({
 
 
 document.querySelector('#open-right').addEventListener('click', function() {
-    rightPanel.open();
+    leftPanel.open();
 });
 
 document.querySelector('#open-top').addEventListener('click', function() {

@@ -1,4 +1,3 @@
-// CMD - Catch Move Direction
 function CMD(element, params) {
     this.element = element;
     this.threshold = params.threshold || 20;
@@ -114,14 +113,13 @@ CMD.prototype.initListeners = function () {
 }
 
 CMD.prototype.triggerEvent = function (eventName, eventParams) {
-    var customEvent = document.createEvent('Event');
-    customEvent.initEvent(eventName, true, true);
-    for (var param in eventParams) {
-        customEvent[param] = eventParams[param];
-    }
-    this.element.dispatchEvent(customEvent);
+    Help.triggerEvent(this.element, eventName, eventParams);
 }
 
 CMD.prototype.on = function (event, callback) {
-    this.element.addEventListener(event, callback, false);
+    Help.addListener(this.element, event, callback, false);
+}
+
+CMD.prototype.off = function (event) {
+    Help.removeListener(this.element, event);
 }
