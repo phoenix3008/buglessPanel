@@ -14,5 +14,14 @@ Bugless Panel was tested, and it runs perfect on such devices, OS and browsers l
 * LG Nexus 4;
 * And other android devices with Chrome browser;
 
+[side]: http://phoenix3008.github.io/buglessPanel/img/side-panel-swipe.gif "Side menu panel"
+[top]: http://phoenix3008.github.io/buglessPanel/img/top-panel-swipe.gif "Top menu panel"
+
+
+| Solarized dark | Solarized Ocean |
+|---|---|
+| ![side menu panel swipe][side] | ![top menu panel swipe][top] |
+
+
 
 
