@@ -97,7 +97,7 @@ BuglessPanels.init({
 });
 ```
 we mean that by swipe on `.container` - the `leftPanel` should be opened.  
-But you can salso open the `leftPanel` by clicking on a button, for this you need to call `open` method of the panel.
+But you can also open the `leftPanel` by clicking on a button, for this you need to call `open` method of the panel.
 ```javascript
 document.querySelector('.btn').addEventListener('click', function(e) {
     leftPanel.open();
@@ -119,7 +119,7 @@ Default value: 40 - defined the distance in % (percents) which the panel should 
 ```javascript
 exceptions
 ```
-Default valie: [] - array containing selectors (id or classes) to elements which are exceptions and should not be listened for swipe.
+Default value: [] - array containing selectors (id or classes) to elements which are exceptions and should not be listened for swipe.
 
 ```javascript
 activePanel
@@ -137,7 +137,7 @@ Default value: [] - contains the list off all initialized panels objects.
 ```javascript
 position
 ```
-Required property which sets the panel position: left, top, right or bottom. Can have one of follow values:
+Required property which sets the panel position: left, top, right or bottom. Can have one of following values:
 `Panel.POSITION_LEFT`, `Panel.POSITION_RIGHT`, `Panel.POSITION_TOP`, `Panel.POSITION_BOTTOM`.
 
 ```javascript
@@ -153,7 +153,7 @@ Default value: 100 - allows to set the panel height in % (percents).
 ```javascript
 maxWidth
 ```
-Default value: null - allows to set the panel max width in px. the panel can be opened, even if the `width` is bigger.
+Default value: null - allows to set the panel max width in pixels, that the panel can be opened, even if the panel `width` is bigger.
 
 ```javascript
 exceptions
