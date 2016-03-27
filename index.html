@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en-us">
+<<<<<<< HEAD
     <head>
         <meta charset="UTF-8">
         <title>Buglesspanel by phoenix3008</title>
@@ -46,6 +47,141 @@
 
             <footer class="site-footer">
                 <span class="site-footer-owner"><a href="https://github.com/phoenix3008/buglessPanel">Buglesspanel</a> is maintained by <a href="https://github.com/phoenix3008">phoenix3008</a>.</span>
+=======
+  <head>
+    <meta charset="UTF-8">
+    <title>Bugless Panel by phoenix3008</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+  </head>
+  <body>
+    <section class="page-header">
+      <h1 class="project-name">Bugless Panel</h1>
+      <h2 class="project-tagline">side menu</h2>
+      <a href="https://github.com/phoenix3008/buglessPanel" class="btn">View on GitHub</a>
+      <a href="https://github.com/phoenix3008/buglessPanel/zipball/master" class="btn">Download .zip</a>
+      <a href="https://github.com/phoenix3008/buglessPanel/tarball/master" class="btn">Download .tar.gz</a>
+    </section>
+
+    <section class="main-content">
+      <h1>
+<a id="bugless-panel" class="anchor" href="#bugless-panel" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Bugless Panel</h1>
+
+<p><strong>Bugless Panel</strong> is a <strong>JavaScript library</strong> used to create <strong>side menu</strong> panels on mobile web sites,
+which can be opened by a swipe on the screen, or by click on a hamburger menu button for example.
+It is written on pure JavaScript and doesn't require any third party libraries like jQuery,
+all what you need to do is to connect the JavaScript and CSS file to your project, and to initialize the panel.
+As result you will get cool side menu panels, which are <strong>cross browser</strong> and <strong>cross platform</strong>.
+Bugless Panel was tested, and it runs perfect on such devices, OS and browsers like:</p>
+
+<ul>
+<li>iPhone 5s / iPhone 6 / iPad devices with iOS and Safari or Chrome browsers;</li>
+<li>Samsung Galaxy S5;</li>
+<li>Samsung S6 Edge;</li>
+<li>LG Nexus 4;</li>
+<li>And other android devices with Chrome browser.</li>
+</ul>
+
+<p>You can see a <a href="http://phoenix3008.github.io/buglessPanel">DEMO</a> of this plugin on oficial <a href="http://phoenix3008.github.io/buglessPanel">Bugless Panle page</a></p>
+
+<p>There are few examples of using Bugless Panel on a mobile version of popular car auction web site.</p>
+
+<table>
+<thead>
+<tr>
+<th>Side menu panel</th>
+<th>Top menu panel</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><img src="http://phoenix3008.github.io/buglessPanel/img/side-panel-swipe.gif" alt="side menu panel swipe" title="Side menu panel"></td>
+<td><img src="http://phoenix3008.github.io/buglessPanel/img/top-panel-swipe.gif" alt="top menu panel swipe" title="Top menu panel"></td>
+</tr>
+</tbody>
+</table>
+
+<h2>
+<a id="how-to-use" class="anchor" href="#how-to-use" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>How to use?</h2>
+
+<p>To use Bugless Panel you need to:</p>
+
+<ul>
+<li>Connect JavaScrip and CSS file on your page</li>
+</ul>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>css/bugless-panel.min.css<span class="pl-pds">"</span></span>&gt;
+&lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>js/bugless-panel.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</pre></div>
+
+<ul>
+<li>Create the base HTML structure of the side pane which includes few required elements</li>
+</ul>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>bugless-panel<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>left-panel<span class="pl-pds">"</span></span>&gt;
+    &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>inner<span class="pl-pds">"</span></span>&gt;Panel content&lt;/<span class="pl-ent">div</span>&gt;
+&lt;/<span class="pl-ent">div</span>&gt;</pre></div>
+
+<ul>
+<li>And the last thing that you need to do is to initialize the panel in your JavaScript file</li>
+</ul>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-k">var</span> leftPanel <span class="pl-k">=</span> <span class="pl-k">new</span> <span class="pl-en">Panel</span>(<span class="pl-s"><span class="pl-pds">'</span>#left-panel<span class="pl-pds">'</span></span>, {
+    position<span class="pl-k">:</span> <span class="pl-smi">Panel</span>.<span class="pl-c1">POSITION_LEFT</span>
+});
+
+<span class="pl-smi">BuglessPanels</span>.<span class="pl-en">init</span>({
+    content<span class="pl-k">:</span> <span class="pl-s"><span class="pl-pds">'</span>.container<span class="pl-pds">'</span></span>,
+    leftPanel<span class="pl-k">:</span> leftPanel
+});</pre></div>
+
+<p>By doing these steps you should get a left side panel which can be opened by a right swipe.</p>
+
+<h2>
+<a id="notes" class="anchor" href="#notes" aria-hidden="true"><span aria-hidden="true" class="octicon octicon-link"></span></a>Notes</h2>
+
+<p>To make Bugless panel work properly you should separate your page content from panels,
+in other words you should have a structure like this:</p>
+
+<div class="highlight highlight-text-html-basic"><pre>&lt;!DOCTYPE html&gt;
+&lt;<span class="pl-ent">html</span>&gt;
+    &lt;<span class="pl-ent">head</span>&gt;
+        &lt;<span class="pl-ent">link</span> <span class="pl-e">rel</span>=<span class="pl-s"><span class="pl-pds">"</span>stylesheet<span class="pl-pds">"</span></span> <span class="pl-e">href</span>=<span class="pl-s"><span class="pl-pds">"</span>css/bugless-panel.min.css<span class="pl-pds">"</span></span>&gt;
+    &lt;/<span class="pl-ent">head</span>&gt;
+    &lt;<span class="pl-ent">body</span>&gt;
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>container<span class="pl-pds">"</span></span>&gt;
+            Page content
+        &lt;/<span class="pl-ent">div</span>&gt;
+
+        &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>bugless-panel<span class="pl-pds">"</span></span> <span class="pl-e">id</span>=<span class="pl-s"><span class="pl-pds">"</span>left-panel<span class="pl-pds">"</span></span>&gt;
+            &lt;<span class="pl-ent">div</span> <span class="pl-e">class</span>=<span class="pl-s"><span class="pl-pds">"</span>inner<span class="pl-pds">"</span></span>&gt;Panel content&lt;/<span class="pl-ent">div</span>&gt;
+        &lt;/<span class="pl-ent">div</span>&gt;
+
+<span class="pl-s1">        &lt;<span class="pl-ent">script</span> <span class="pl-e">src</span>=<span class="pl-s"><span class="pl-pds">"</span>js/bugless-panel.min.js<span class="pl-pds">"</span></span>&gt;&lt;/<span class="pl-ent">script</span>&gt;</span>
+    &lt;/<span class="pl-ent">body</span>&gt;
+&lt;/<span class="pl-ent">html</span>&gt;
+</pre></div>
+
+<p>When we initialize <code>BuglessPanel</code> in the example above:</p>
+
+<pre lang="javascrip"><code>BuglessPanels.init({
+    content: '.container',
+    leftPanel: leftPanel
+});
+</code></pre>
+
+<p>we mean that by swipe on <code>.container</code> - the <code>leftPanel</code> should br opened.
+But you can also open the <code>leftPanel</code> by clicking on a button, for this you need to add event listener on button and call <code>open</code> method of the panel.</p>
+
+<div class="highlight highlight-source-js"><pre><span class="pl-c1">document</span>.<span class="pl-en">querySelector</span>(<span class="pl-s"><span class="pl-pds">'</span>.btn<span class="pl-pds">'</span></span>).<span class="pl-en">addEventListener</span>(<span class="pl-s"><span class="pl-pds">'</span>click<span class="pl-pds">'</span></span>, <span class="pl-k">function</span>(<span class="pl-smi">e</span>) {
+    <span class="pl-smi">leftPanel</span>.<span class="pl-c1">open</span>();
+});</pre></div>
+
+      <footer class="site-footer">
+        <span class="site-footer-owner"><a href="https://github.com/phoenix3008/buglessPanel">Bugless Panel</a> is maintained by <a href="https://github.com/phoenix3008">phoenix3008</a>.</span>
+>>>>>>> origin/gh-pages
 
                 <span class="site-footer-credits">This page was generated by <a href="https://pages.github.com">GitHub Pages</a> using the <a href="https://github.com/jasonlong/cayman-theme">Cayman theme</a> by <a href="https://twitter.com/jasonlong">Jason Long</a>.</span>
             </footer>
