@@ -1,7 +1,7 @@
 Bugless Panel
 ==================
 
-**Bugless Panel** is a **JavaScript library** used to create **side menu** panels on mobile web sites, 
+**Bugless Panel** is a **JavaScript plugin** used to create **side menu** panels on mobile web sites, 
 which can be opened by a swipe on the screen, or by click on a hamburger menu button for example.
 It is written on pure JavaScript and doesn't require any third party libraries like jQuery, 
 all what you need to do is to connect the JavaScript and CSS file to your project, and to initialize the panel.
