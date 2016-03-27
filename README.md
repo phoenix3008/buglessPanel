@@ -134,16 +134,38 @@ Default value: [] - contains the list off all initialized panels objects.
 
 ## "Panel" properties
 
-self.x = null;
-self.y = null;
-self.isOpened = false;
-self.isMoving = false;
+```javascript
+position
+```
+Required property which sets the panel position: left, top, right or bottom. Can have one of follow values:
+`Panel.POSITION_LEFT`, `Panel.POSITION_RIGHT`, `Panel.POSITION_TOP`, `Panel.POSITION_BOTTOM`.
 
+```javascript
+width
+```
+Default value: 100 - allows to set the panel width in % (percents).
 
-// Params
-self.position = params.position;
-self.width = self.w = params.width || 100; // in %
-self.height = params.height || 100; // in %
-self.maxWidth = params.maxWidth || null; // in px
-self.exceptions = params.exceptions || [];
-self.closeBySwipe = params.closeBySwipe || true;
+```javascript
+height
+```
+Default value: 100 - allows to set the panel height in % (percents).
+
+```javascript
+maxWidth
+```
+Default value: null - allows to set the panel max width in px. the panel can be opened, even if the `width` is bigger.
+
+```javascript
+exceptions
+```
+Default value: [] - contains an array of selectors of elements on the panel which will be ignored when dragging on them.
+
+```javascript
+closeBySwipe
+```
+Default value: true - allows to disable possibility to close the panel by a swipe.
+
+```javascript
+isOpened
+```
+Allows check if the panel is opened or not.
