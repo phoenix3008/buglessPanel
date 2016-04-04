@@ -132,6 +132,14 @@ panels
 Default value: [] - contains the list off all initialized panels objects.
 
 
+## "BuglessPanels" methods
+
+```javascript
+closeAll
+```
+Use `BuglessPanels.closeAll()` to close all opened panels.
+
+
 ## "Panel" properties
 
 ```javascript
@@ -169,3 +177,36 @@ Default value: true - allows to disable possibility to close the panel by a swip
 isOpened
 ```
 Allows check if the panel is opened or not.
+
+## "Panel" methods
+
+```javascript
+open
+```
+Use `open` method to open the panel programmatically.
+
+```javascript
+close
+```
+Use `close` method to close the panel programmatically.
+
+## "Panel" events
+
+There are 4 events of panel object:
+* open - is fired when the panel stars to open;
+* opened - is fired when the panel is opened;
+* close - is fired when the panel starts to close;
+* closed - is fired when the panel is closed.
+
+Example of use
+
+```javascript
+var leftPanel = new Panel('#left-panel', {
+    position: Panel.POSITION_LEFT
+});
+
+leftPanel.on('opened', function(p) {
+    // 'p' is the object of this panel
+    alert('panel is opened');
+});
+```
