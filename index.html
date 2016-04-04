@@ -1,15 +1,48 @@
 <!DOCTYPE html>
 <html lang="en-us">
   <head>
-    <meta charset="UTF-8">
-    <title>Bugless Panel by phoenix3008</title>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
-    <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
-    <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
-  </head>
+        <meta charset="UTF-8">
+        <title>Bugless Panel - mobile side menu - side panel</title>
+        <meta name="description" content="Bugless Panel is a JavaScript plugin used to create side menu panels on mobile web sites, open by a swipe on the screen, or by click on a button. It is written on pure JavaScript and doesn't require any third party libraries like jQuery">
+        <meta name="keywords" content="side menu, side panel, panel, menu, mobile menu, mobile side menu, swipe side menu, javascript mobile menu, javascript side menu, iPhone side menu, android side menu, mobile panel">
+
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" type="text/css" href="stylesheets/normalize.css" media="screen">
+        <link rel="stylesheet" href="buglessPanel/css/bugless-panel.min.css">
+        <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,700' rel='stylesheet' type='text/css'>
+        <link rel="stylesheet" type="text/css" href="stylesheets/stylesheet.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="stylesheets/github-light.css" media="screen">
+    </head>
   <body>
+
+    <div class="bugless-panel side-menu-panel" id="left-panel">
+        <div class="inner">
+            <ul class="side-menu-list">
+                <li><a href="#">Login</a></li>
+                <li><a href="#">Register</a></li>
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Search</a></li>
+                <li><a href="#">Friends</a></li>
+                <li><a href="#">Photos</a></li>
+                <li><a href="#">Videos</a></li>
+                <li><a href="#">Songs</a></li>
+                <li><a href="#">Messages</a></li>
+                <li><a href="#">Groups</a></li>
+                <li><a href="#">Feedback</a></li>
+                <li><a href="#">Settings</a></li>
+                <li><a href="#">Applications</a></li>
+                <li><a href="#">Documents</a></li>
+                <li><a href="#">Games</a></li>
+                <li><a href="#">Guests</a></li>
+                <li><a href="#">Favorites</a></li>
+                <li><a href="#">Black list</a></li>
+                <li><a href="#">Log out</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="bugless-content">
+
     <section class="page-header">
       <h1 class="project-name">Bugless Panel</h1>
       <h2 class="project-tagline">Side menu, Swipe panel</h2>
@@ -37,9 +70,9 @@ Bugless Panel was tested, and it runs perfect on such devices, OS and browsers l
 <li>And other android devices with Chrome browser.</li>
 </ul>
 
-<p>You can see a <a href="http://phoenix3008.github.io/buglessPanel">DEMO</a> of this plugin on official <a href="http://phoenix3008.github.io/buglessPanel">Bugless Panle page</a></p>
-
 <p>There are few examples of using Bugless Panel on a mobile version of popular car auction web site.</p>
+
+<p class="inportant">To try Bugless Panel please open this page on a mobile device and try to swipe to right or click on hamburger menu button in the header</p>
 
 <table>
 <thead>
@@ -235,6 +268,18 @@ But you can also open the <code>leftPanel</code> by clicking on a button, for th
 
     </section>
 
-  
+    </div>
+        <script src="buglessPanel/js/bugless-panel.min.js"></script>
+        <script src="js/main.js"></script>
+        <script>
+            (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+                m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+                                    })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+            ga('create', 'UA-75599996-1', 'auto');
+            ga('send', 'pageview');
+
+        </script>
   </body>
 </html>
