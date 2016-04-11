@@ -90,10 +90,16 @@ CMD.prototype.initListeners = function () {
                     self.triggerEvent('movetop', eventParams);
                 }
             }
+
         } else {
-            if((moveOrientation == 'horizontal' && movementY) || (moveOrientation == 'vertical' && movementX)) {
+            if((stableDirection == 'right' || stableDirection == 'left') && movementY) {
                 e.preventDefault();
             }
+
+            if((stableDirection == 'top' || stableDirection == 'bottom') && movementX) {
+                e.preventDefault();
+            }
+
             self.triggerEvent('move' + stableDirection, eventParams);
         }
 
