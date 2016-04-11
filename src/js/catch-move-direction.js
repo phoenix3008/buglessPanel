@@ -96,10 +96,6 @@ CMD.prototype.initListeners = function () {
                 e.preventDefault();
             }
 
-            if((stableDirection == 'top' || stableDirection == 'bottom') && movementX) {
-                e.preventDefault();
-            }
-
             self.triggerEvent('move' + stableDirection, eventParams);
         }
 
