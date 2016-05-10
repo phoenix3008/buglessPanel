@@ -34,9 +34,16 @@ body
     height 100%
     width 100%
     z-index 1000
-    .inner
-        min-height calc(100% + 1px)
-    &.animate
+	.inner
+		&:before, &:after
+			display table
+			content ""
+			line-height 0
+		&:after
+			clear both
+	.inner
+		min-height calc(100% + 1px)
+	&.animate
         transition transform .2s linear
 
 
