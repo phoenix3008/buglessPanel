@@ -38,10 +38,19 @@ body {
   left: 0;
   right: 0;
 }
-.bugless-panel .inner {
+.inner:before,
+.inner:after {
+  display: table;
+  content: "";
+  line-height: 0;
+}
+.inner:after {
+  clear: both;
+}
+.inner {
   min-height: calc(100% + 1px);
 }
-.bugless-panel.animate {
+.animate {
   transition: transform 0.2s linear;
 }
 .bugless-backdrop {
