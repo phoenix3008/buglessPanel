@@ -45,13 +45,14 @@ CMD.prototype.initListeners = function () {
         var deltaX = e.touches[0].clientX - self.startX,
             deltaY = e.touches[0].clientY - self.startY,
             movementX = Math.abs(deltaX) > 0,
-            movementY = Math.abs(deltaY) > 0;
+            movementY = Math.abs(deltaY) > 0,
+			persistMoveY = Math.abs(deltaY) > Math.abs(deltaX);
 
         if(self.preventScroll) {
-            if(deltaY > 0 && self.element.scrollTop <= 0) {
+            if(deltaY > 0 && persistMoveY && self.element.scrollTop <= 0) {
                 e.preventDefault();
             }
-            if(self.innerElement && deltaY < 0 && self.element.scrollTop + self.element.offsetHeight >= self.innerElement.offsetHeight) {
+            if(self.innerElement && deltaY < 0 && persistMoveY && self.element.scrollTop + self.element.offsetHeight >= self.innerElement.offsetHeight) {
                 e.preventDefault();
             }
         }
