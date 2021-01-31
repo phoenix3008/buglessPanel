@@ -16,9 +16,6 @@ Bugless Panel was tested, and it runs perfect on such devices, OS and browsers l
 
 You can see a [DEMO](http://phoenix3008.github.io/buglessPanel) of this plugin on official [Bugless Panle page](http://phoenix3008.github.io/buglessPanel)
 
-
-There are few examples of using Bugless Panel on a mobile version of popular car auction web site.
-
 [side]: http://phoenix3008.github.io/buglessPanel/img/side-panel-swipe.gif "Side menu panel"
 [top]: http://phoenix3008.github.io/buglessPanel/img/top-panel-swipe.gif "Top menu panel"
 
